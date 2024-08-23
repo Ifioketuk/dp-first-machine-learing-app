@@ -1,9 +1,10 @@
-# 📦 Streamlit App Starter Kit 
+# 🤖GPA prediction model 
 ```
 ⬆️ (Replace above with your app's name)
 ```
 
 Description of the app ...
+This is an app used to predict  the cgpa at the end of your first year based off academic performance at the end of high-school and study habits during the first year semesters.
 
 ## Demo App
 

@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import pandas as pd
+import os
 
 # Define the URL of the Excel file on GitHub
 url = "https://raw.githubusercontent.com/Ifioketuk/dp-first-machine-learing-app/main/Nigerian%20Student's%20Year%20One%20Performance%20Survey(1-174).xlsx"
@@ -15,7 +16,7 @@ with open("Nigerian_Students_Year_One_Performance_Survey.xlsx", "wb") as file:
 # Title and description for the app
 st.title('🤖 CGPA Prediction App')
 st.write('This is an app used to predict the CGPA at the end of your first year based on academic performance at the end of high school and study habits during the first year semesters.')
-import os
+
 if os.path.exists("Nigerian_Students_Year_One_Performance_Survey.xlsx"):
     st.write("File downloaded successfully.")
 else:

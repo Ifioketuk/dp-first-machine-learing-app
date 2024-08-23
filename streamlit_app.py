@@ -15,6 +15,12 @@ with open("Nigerian_Students_Year_One_Performance_Survey.xlsx", "wb") as file:
 # Title and description for the app
 st.title('🤖 CGPA Prediction App')
 st.write('This is an app used to predict the CGPA at the end of your first year based on academic performance at the end of high school and study habits during the first year semesters.')
+import os
+if os.path.exists("Nigerian_Students_Year_One_Performance_Survey.xlsx"):
+    st.write("File downloaded successfully.")
+else:
+    st.write("File download failed.")
+
 
 # Read the Excel file using pandas
 df = pd.read_excel("Nigerian_Students_Year_One_Performance_Survey.xlsx", index_col=0)

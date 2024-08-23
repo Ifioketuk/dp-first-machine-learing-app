@@ -23,7 +23,4 @@ else:
 
 
 # Read the Excel file using pandas
-df = pd.read_excel("Nigerian_Students_Year_One_Performance_Survey.xlsx", index_col=0)
 
-# Display the dataframe in Streamlit
-st.dataframe(df)

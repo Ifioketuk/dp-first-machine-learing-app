@@ -14,6 +14,10 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from pickle import load
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
+import joblib
+
 import time
 
 title=st.empty()
@@ -182,7 +186,7 @@ ordinal_cod= OrdinalEncoder()
 X_train[categorical_columns] = ordinal_cod.fit_transform(X_train[categorical_columns])
 X_test[categorical_columns] = ordinal_cod.transform(X_test[categorical_columns])
 
-
+loaded_kmeans = joblib.load('kmeans_model.pkl')
                                                                                         
                                                                                         
 model=load("model1.pkl",'rb')    

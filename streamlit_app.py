@@ -75,7 +75,7 @@ with col2:
     grading_system = st.select_slider('grading_system', options=[4, 5, 7, 10])
 
     
-col1, col2,col3 = st.columns(3)
+col1, col2= st.columns(2)
 with col1:
     st.write("Give your ratings in the following")
     class_participation_rating = st.radio("class_participation_rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
@@ -88,12 +88,13 @@ with col2:
     evening_study = st.radio("evening_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     late_night_study= st.radio("late_night_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     used_extra_study_materials=st.radio("use of extra study materials",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-
-with col3:
+col1, col2= st.columns(2)
+with col1:
     hours_per_day_personal_study=st.number_input('hours_per_day_personal_study',min_value=0,max_value=24,format="%d")
     days_per_week_reading=st.number_input('days_per_week_reading',min_value=0,max_value=7,format="%d")
     study_mode= st.select_slider('study_mode', options=['part time','full time'])
     taught_peers= st.select_slider('taught_peers',options=["Yes","No"])
+with col2:
     extra_curricular= st.select_slider('Did you attend extra-curriculars?',options=["Yes","No"])
     allowance=st.select_slider('What was your monthly allowance in Year One?', options=["10k-20k", "30k-50k", "60k-100k", "above 100k"])
     courses_offered=st.number_input("Number of courses offered")

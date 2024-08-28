@@ -82,46 +82,109 @@ with col1:
     afternoon_study = st.radio("afternoon_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     evening_study = st.radio("evening_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     late_night_study= st.radio("late_night_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    allowance=st.select_slider('grading_system', options=["10k-20k", "30k-50k", "60k-100k", "above 100k"])
+    used_extra_study_materials=st.radio("use of extra study materials",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+
 with col2:
     hours_per_day_personal_study=st.number_input('hours_per_day_personal_study',min_value=0,max_value=24,format="%d")
     days_per_week_reading=st.number_input('days_per_week_reading',min_value=0,max_value=7,format="%d")
     study_mode= st.select_slider('study_mode', options=['part time','full time'])
-    taught_peers= st'select_slider('taught_peers',options=["Yes"."No")
-    
+    taught_peers= st.select_slider('taught_peers',options=["Yes"."No")
+    extra_curricular= st.select_slider('Did you attend extra-curriculars?',options=["Yes"."No")
+    allowance=st.select_slider('What was your monthly allowance in Year One?', options=["10k-20k", "30k-50k", "60k-100k", "above 100k"])
+    courses_offered=st.number_input("Number of courses offered")
+studied_original_course= st.select_slider('Did you study your original course',options=["Yes"."No")
 
-data = {
-    'jamb_score': ,
-    'english': ,
-    'maths': ,
-    'subject_3': ,
-    'subject_4': ,
-    'subject_5': ,
-    'age_in_year_one': ,
-    'gender': ,
-    'has_disability': ,
+                                                                                        
+                                                                                        
+                                                                                        
+data ={    
+                                                                                        
+    'jamb_score':jamb_score ,
+    'english': english,
+    'maths': maths ,
+    'subject_3': subject_3,
+    'subject_4': subject_4,
+    'subject_5': subject_5,
+    'age_in_year_one': age_in_year_one,
+    'gender':gender ,
+    'has_disability': has_disability,
     'Did you attend extra tutorials?': ,
     'extracurricular_participation':,
-    'class_attendance_rating': ,
-    'class_participation_rating': ,
-    'used_extra_study_materials': ,
-    'morning_study': ,
-    'afternoon_study': ,
-    'evening_study': ,
-    'late_night_study': ,
-    'days_per_week_reading': ,
+    'class_attendance_rating': class_attendance_rating ,
+    'class_participation_rating': class_participation_rating,
+    'used_extra_study_materials': used_extra_study_materials,
+    'morning_study':morning_study ,
+    'afternoon_study':afternoon_study ,
+    'evening_study':evening_study ,
+    'late_night_study':late_night_study ,
+    'days_per_week_reading': days_per_week_reading,
     'hours_per_day_personal_study': ,
-    'taught_peers': ,
-    'courses_offered': ,
+    'taught_peers': taught_peers,
+    'courses_offered':courses_offered ,
     'times_fell_sick': ,
-    'study_mode': ,
-    'studied_original_course': ,
-    'What was your monthly allowance in Year One?': ,
-    'teaching_style_rating': ,
-    'institution_type': ,
-    'What year did you finish Year One?':,
-    'grading_system': 
-}
+    'study_mode': study_mode,
+    'studied_original_course':studied_original_course ,
+    'What was your monthly allowance in Year One?':allowance ,
+    'teaching_style_rating': teaching_style_rating,
+    'institution_type':institution_type ,
+    'What year did you finish Year One?':year,
+    'grading_system': grading_system}
+
+gpa_data_comp_col= pd.DataFrame(data)
+
+
+grade_features = ['maths', 'english','subject_3', 'subject_4', 'subject_5']
+grade_to_value = {'A': 4, 'B': 3, 'C': 2, 'D': 1, 'F': 0}
+
+# Map grades to values
+for col in grade_features:
+    gpa_data_comp_col[col] = gpa_data_comp_col[col].map(grade_to_value)
+
+# Calculate Combined_grade
+gpa_data_comp_col['Combined_grade'] = (
+    gpa_data_comp_col['english'] +
+    gpa_data_comp_col['maths'] +
+    gpa_data_comp_col['subject_3'] +
+
+    gpa_data_comp_col['subject_4'] +
+    gpa_data_comp_col['subject_5']
+)
+
+# Apply condition and update Combined_grade
+gpa_data_comp_col.loc[
+    (gpa_data_comp_col['maths'] < 1) | (gpa_data_comp_col['english'] < 1),
+    'Combined_grade'
+] = gpa_data_comp_col['Combined_grade'] / 3
+
+bins = [0, 10, 15, 20]  # Define the edges of the bins
+labels = ['Rank 3', 'Rank 2', 'Rank 1']  # Define labels for each bin
+
+# Use pd.cut to create the 'grade_rank' column
+gpa_data_comp_col['grade_rank'] = pd.cut(
+    gpa_data_comp_col['Combined_grade'],
+    bins=bins,
+    labels=labels,
+    right=True,  # Include the right edge of bins
+    include_lowest=True  # Include the lowest edge
+)
+
+Z = gpa_data_comp_col.drop(['What year did you finish Year One?', 'english', 'maths', 'subject_3', 'subject_4', 'subject_5'], axis=1)  # Features excluding 'id' and 'GPA_normal'
+  # Target variable
+
+# Train-test split
+X_train, X_test, y_train, y_test = train_test_split(Z, y, test_size=0.2, random_state=42)
+
+categorical_columns =  [col for col in X_train.columns if X_train[col].dtype in ['object','category']]
+X_train[categorical_columns] = X_train[categorical_columns].astype(str)
+X_test[categorical_columns] = X_test[categorical_columns].astype(str)
+
+ordinal_cod= OrdinalEncoder()
+X_train[categorical_columns] = ordinal_cod.fit_transform(X_train[categorical_columns])
+X_test[categorical_columns] = ordinal_cod.transform(X_test[categorical_columns])
+
+
+                                                                                        
+                                                                                        
 model=load("model1.pkl",'rb')    
 
 

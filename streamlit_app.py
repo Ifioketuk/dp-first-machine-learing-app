@@ -74,7 +74,8 @@ with col2:
 col1, col2 = st.columns(2)
 with col1:
     st.write("Give your ratings in the following")
-    class_participation_rating = st.radio("class_attendance_rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+    class_participation_rating = st.radio("class_participation_rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+    class_attendance_rating=st.radio("class_attendance_rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     teaching_style_rating = st.radio("teaching_style_rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     extracurricular_participation = st.radio("extracurricular_participation",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     morning_study = st.radio("morning_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
@@ -85,8 +86,8 @@ with col1:
 with col2:
     hours_per_day_personal_study=st.number_input('hours_per_day_personal_study',min_value=0,max_value=24,format="%d")
     days_per_week_reading=st.number_input('days_per_week_reading',min_value=0,max_value=7,format="%d")
-    
-
+    study_mode= st.select_slider('study_mode', options=['part time','full time'])
+    taught_peers= st'select_slider('taught_peers',options=["Yes"."No")
     
 
 data = {

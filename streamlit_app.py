@@ -135,7 +135,7 @@ if st.button('Show CGPA'):
         'What year did you finish Year One?':year,
         'grading_system': grading_system}
     
-    gpa_data_comp_col= pd.DataFrame(data)
+    gpa_data_comp_col= pd.DataFrame([data])
     
     
     grade_features = ['maths', 'english','subject_3', 'subject_4', 'subject_5']
@@ -195,7 +195,7 @@ if st.button('Show CGPA'):
     model=load("model1.pkl",'rb')
     predictions= model.predict(Z)
     st.write("🤖Your CGPA is")
-    st.write(predictions)
+    st.write(predictions*gpa_comp_col["grading_system"])
 
 
 

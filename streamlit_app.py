@@ -100,7 +100,7 @@ studied_original_course= st.select_slider('Did you study your original course',o
 
                                                                                         
                                                                                         
-                                                                                        
+if st.button('Show CGPA'):                                                                                        
 data ={    
                                                                                         
     'jamb_score':jamb_score ,
@@ -172,24 +172,29 @@ gpa_data_comp_col['grade_rank'] = pd.cut(
     include_lowest=True  # Include the lowest edge
 )
 
+
+loaded_kmeans = joblib.load('kmeans_model.pkl')
+gpa_data_comp_col['cluster']= loaded_kmeans.predict(gpa_data_comp_col)
+
 Z = gpa_data_comp_col.drop(['What year did you finish Year One?', 'english', 'maths', 'subject_3', 'subject_4', 'subject_5'], axis=1)  # Features excluding 'id' and 'GPA_normal'
   # Target variable
 
 # Train-test split
-X_train, X_test, y_train, y_test = train_test_split(Z, y, test_size=0.2, random_state=42)
 
-categorical_columns =  [col for col in X_train.columns if X_train[col].dtype in ['object','category']]
-X_train[categorical_columns] = X_train[categorical_columns].astype(str)
-X_test[categorical_columns] = X_test[categorical_columns].astype(str)
+
+categorical_columns =  [col for col in Z.columns if Z[col].dtype in ['object','category']]
+Z[categorical_columns] = Z[categorical_columns].astype(str)
+
 
 ordinal_cod= OrdinalEncoder()
-X_train[categorical_columns] = ordinal_cod.fit_transform(X_train[categorical_columns])
-X_test[categorical_columns] = ordinal_cod.transform(X_test[categorical_columns])
+Z[categorical_columns] = ordinal_cod.fit_transform(Z[categorical_columns])
 
-loaded_kmeans = joblib.load('kmeans_model.pkl')
-                                                                                        
-                                                                                        
-model=load("model1.pkl",'rb')    
+
+
+model=load("model1.pkl",'rb')
+predictions= model.predict(Z)
+st.write("🤖Your CGPA is")
+st.write(predictions)
 
 
 

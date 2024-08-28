@@ -93,10 +93,10 @@ with col2:
     days_per_week_reading=st.number_input('days_per_week_reading',min_value=0,max_value=7,format="%d")
     study_mode= st.select_slider('study_mode', options=['part time','full time'])
     taught_peers= st.select_slider('taught_peers',options=["Yes","No"])
-    extra_curricular= st.select_slider('Did you attend extra-curriculars?',options=["Yes"."No")
+    extra_curricular= st.select_slider('Did you attend extra-curriculars?',options=["Yes","No"])
     allowance=st.select_slider('What was your monthly allowance in Year One?', options=["10k-20k", "30k-50k", "60k-100k", "above 100k"])
     courses_offered=st.number_input("Number of courses offered")
-studied_original_course= st.select_slider('Did you study your original course',options=["Yes"."No")
+studied_original_course= st.select_slider('Did you study your original course',options=["Yes","No"])
 
                                                                                         
                                                                                         

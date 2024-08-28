@@ -39,8 +39,13 @@ bar.empty()
 # Display the final message
 exitstatement=st.empty()
 exitstatement.write('...and now we\'re done!')
+
+#let both statements disappear
+latest_iteration.empty()
+bar.empty()
 exitstatement.empty()
 title.empty()
+#actual title
 st.title('🤖 CGPA Prediction App')
 st.write('This is an app used to predict the CGPA at the end of your first year based on academic performance at the end of high school and study habits during the first year semesters.')
 

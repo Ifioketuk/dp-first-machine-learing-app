@@ -59,7 +59,7 @@ st.write("Fill in the following features to get your possible GPA")
 col1, col2 = st.columns(2)
 with col1:
     age_in_year_one=st.number_input("age_in_year_one")
-    gender=st.select_slider('gender', options=['Yes','No'])
+    gender=st.select_slider('gender', options=['male','female'])
     has_disability=st.select_slider('has_disability', options=['Yes','No'])
     times_fell_sick=st.text_input('times_fell_sick')
     institution_type=st.select_slider('institution_type', options=['public','private'])
@@ -75,20 +75,21 @@ with col2:
     grading_system = st.select_slider('grading_system', options=[4, 5, 7, 10])
 
     
-col1, col2 = st.columns(2)
+col1, col2,col3 = st.columns(3)
 with col1:
     st.write("Give your ratings in the following")
     class_participation_rating = st.radio("class_participation_rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     class_attendance_rating=st.radio("class_attendance_rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     teaching_style_rating = st.radio("teaching_style_rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     extracurricular_participation = st.radio("extracurricular_participation",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+with col2:
     morning_study = st.radio("morning_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     afternoon_study = st.radio("afternoon_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     evening_study = st.radio("evening_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     late_night_study= st.radio("late_night_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     used_extra_study_materials=st.radio("use of extra study materials",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
 
-with col2:
+with col3:
     hours_per_day_personal_study=st.number_input('hours_per_day_personal_study',min_value=0,max_value=24,format="%d")
     days_per_week_reading=st.number_input('days_per_week_reading',min_value=0,max_value=7,format="%d")
     study_mode= st.select_slider('study_mode', options=['part time','full time'])

@@ -135,71 +135,68 @@ if st.button('Show CGPA'):
         'institution_type':institution_type ,
         'What year did you finish Year One?':year,
         'grading_system': grading_system}
-    
-    gpa_data_comp_col= pd.DataFrame([data])
-    
-    
-    grade_features = ['maths', 'english','subject_3', 'subject_4', 'subject_5']
+
+       gpa_data_comp_col = pd.DataFrame([data])
+
+    # Define grade features and mapping
+    grade_features = ['maths', 'english', 'subject_3', 'subject_4', 'subject_5']
     grade_to_value = {'A': 4, 'B': 3, 'C': 2, 'D': 1, 'F': 0}
     
-    # Map grades to values
+    # Map grades to numeric values
     for col in grade_features:
         gpa_data_comp_col[col] = gpa_data_comp_col[col].map(grade_to_value)
     
-    # Calculate Combined_grade
-    gpa_data_comp_col['Combined_grade'] = (
-        gpa_data_comp_col['english'] +
-        gpa_data_comp_col['maths'] +
-        gpa_data_comp_col['subject_3'] +
+    # Calculate Combined Grade
+    gpa_data_comp_col['Combined_grade'] = gpa_data_comp_col[grade_features].sum(axis=1)
     
-        gpa_data_comp_col['subject_4'] +
-        gpa_data_comp_col['subject_5']
-    )
-    
-    # Apply condition and update Combined_grade
+    # Apply the condition for Combined Grade update
     gpa_data_comp_col.loc[
         (gpa_data_comp_col['maths'] < 1) | (gpa_data_comp_col['english'] < 1),
         'Combined_grade'
     ] = gpa_data_comp_col['Combined_grade'] / 3
     
-    bins = [0, 10, 15, 20]  # Define the edges of the bins
-    labels = ['Rank 3', 'Rank 2', 'Rank 1']  # Define labels for each bin
-    
-    # Use pd.cut to create the 'grade_rank' column
+    # Rank grades
+    bins = [0, 10, 15, 20]  # Define bins
+    labels = ['Rank 3', 'Rank 2', 'Rank 1']  # Define labels
     gpa_data_comp_col['grade_rank'] = pd.cut(
         gpa_data_comp_col['Combined_grade'],
         bins=bins,
         labels=labels,
-        right=True,  # Include the right edge of bins
-        include_lowest=True  # Include the lowest edge
+        right=True,
+        include_lowest=True
     )
     
-    
+    # Load KMeans model
     loaded_kmeans = joblib.load('kmeans_model.pkl')
-    gpa_data_comp_col['cluster']= loaded_kmeans.predict(gpa_data_comp_col)
+    gpa_data_comp_col['cluster'] = loaded_kmeans.predict(gpa_data_comp_col[grade_features + ['Combined_grade']])
     
-    Z = gpa_data_comp_col.drop(['What year did you finish Year One?', 'english', 'maths', 'subject_3', 'subject_4', 'subject_5'], axis=1)  # Features excluding 'id' and 'GPA_normal'
-      # Target variable
+    # Prepare the data for the main model
+    features_to_drop = ['What year did you finish Year One?', 'english', 'maths', 'subject_3', 'subject_4', 'subject_5']
+    Z = gpa_data_comp_col.drop(features_to_drop, axis=1)
     
-    # Train-test split
-    
-    
-    categorical_columns =  [col for col in Z.columns if Z[col].dtype in ['object','category']]
+    # Ensure categorical columns are encoded
+    categorical_columns = [col for col in Z.columns if Z[col].dtype == 'object']
     Z[categorical_columns] = Z[categorical_columns].astype(str)
     
+    # Apply ordinal encoding to categorical columns
+    ordinal_enc = OrdinalEncoder()
+    Z[categorical_columns] = ordinal_enc.fit_transform(Z[categorical_columns])
     
-    ordinal_cod= OrdinalEncoder()
-    Z[categorical_columns] = ordinal_cod.fit_transform(Z[categorical_columns])
+    # Load the trained model
+    model = joblib.load("model1.pkl")
     
+    # Ensure the features match the model training set
+    expected_features = model.feature_names_in_
+    Z = Z[expected_features]
     
+    # Make predictions
+    predictions = model.predict(Z)
     
-    model=load("model1.pkl",'rb')
-    predictions= model.predict(Z)
-    st.write("🤖Your CGPA is")
-    st.write(predictions*gpa_comp_col["grading_system"])
-
-
-
+    # Display results
+    st.write("🤖 Your CGPA is:")
+    st.write(predictions * gpa_data_comp_col["grading_system"].values[0])  # Scale 
+        
+        
 
 
 

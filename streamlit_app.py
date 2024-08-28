@@ -136,7 +136,7 @@ if st.button('Show CGPA'):
         'What year did you finish Year One?':year,
         'grading_system': grading_system}
 
-       gpa_data_comp_col = pd.DataFrame([data])
+    gpa_data_comp_col = pd.DataFrame([data])
 
     # Define grade features and mapping
     grade_features = ['maths', 'english', 'subject_3', 'subject_4', 'subject_5']

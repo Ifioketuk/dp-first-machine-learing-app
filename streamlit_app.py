@@ -168,9 +168,7 @@ if st.button('Show CGPA'):
         include_lowest=True
     )
 
-    # Load KMeans model
-    loaded_kmeans = joblib.load('kmeans_model.pkl')
-    gpa_data_comp_col['cluster'] = loaded_kmeans.predict(gpa_data_comp_col[grade_features + ['Combined_grade']])
+    
 
     # Prepare the data for the main model
     Z = gpa_data_comp_col.drop(['What year did you finish Year One?', 'english', 'maths', 'subject_3', 'subject_4', 'subject_5'], axis=1)

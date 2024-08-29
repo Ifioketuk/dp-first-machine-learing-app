@@ -187,7 +187,7 @@ if st.button('Show CGPA'):
     Z[categorical_columns] = ordinal_enc.fit_transform(Z[categorical_columns])
     
     # Load the trained model
-    model = joblib.load("model1.pkl")
+    model = joblib.load("model1.json")
     
     # Ensure the features match the model training set
     expected_features = model.feature_names_in_

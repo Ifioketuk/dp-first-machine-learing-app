@@ -20,7 +20,6 @@ import joblib
 
 import time
 # Load the trained model
-model = joblib.load("model.json")
 title=st.empty()
 title.title('PRACTICE MODEL')
 
@@ -188,7 +187,8 @@ if st.button('Show CGPA'):
     Z[categorical_columns] = ordinal_enc.fit(Z[categorical_columns])
     
   
-    
+    model = joblib.load("model.json")
+
     # Ensure the features match the model training set
     expected_features = model.feature_names_in_
     Z = Z[expected_features]

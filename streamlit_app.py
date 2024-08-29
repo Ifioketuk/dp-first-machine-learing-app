@@ -192,6 +192,7 @@ if st.button('Show CGPA'):
     # Ensure the features match the model training set
     expected_features = model.feature_names_in_
     Z = Z[expected_features]
+    st.dataframe(z)
     
     # Make predictions
     predictions = model.predict(Z)

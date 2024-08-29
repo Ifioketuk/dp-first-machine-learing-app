@@ -140,7 +140,7 @@ if st.button('Show CGPA'):
     gpa_data_comp_col = pd.DataFrame([data])
 
     st.write("User Inputs DataFrame:")
-    st.database(gpa_data_comp_col)
+    st.dataframe(gpa_data_comp_col)
 
     # Define grade features and mapping
     grade_features = ['maths', 'english', 'subject_3', 'subject_4', 'subject_5']

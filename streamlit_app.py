@@ -19,7 +19,8 @@ from sklearn.datasets import make_blobs
 import joblib
 
 import time
-
+# Load the trained model
+model = joblib.load("model.json")
 title=st.empty()
 title.title('PRACTICE MODEL')
 
@@ -186,8 +187,7 @@ if st.button('Show CGPA'):
     ordinal_enc = OrdinalEncoder()
     Z[categorical_columns] = ordinal_enc.fit_transform(Z[categorical_columns])
     
-    # Load the trained model
-    model = joblib.load("model.json")
+  
     
     # Ensure the features match the model training set
     expected_features = model.feature_names_in_

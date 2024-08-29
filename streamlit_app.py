@@ -174,7 +174,7 @@ if st.button('Show CGPA'):
     Z = gpa_data_comp_col.drop(['What year did you finish Year One?', 'english', 'maths', 'subject_3', 'subject_4', 'subject_5'], axis=1)
 
     # Ensure categorical columns are encoded
-    categorical_columns = [col for col in Z.columns if Z[col].dtype == 'object']
+    categorical_columns = [col for col in Z.columns if Z[col].dtype in ['object','category']]
     Z[categorical_columns] = Z[categorical_columns].astype(str)
 
     # Apply ordinal encoding to categorical columns
@@ -187,7 +187,10 @@ if st.button('Show CGPA'):
     # Ensure the features match the model training set
     expected_features = model.feature_names_in_
     Z = Z[expected_features]
-    
+    Z=Z.fillna(Z.median())
+
+    Z.replace([np.inf, -np.inf], np.nan, inplace=True)
+
     st.write("Prepared DataFrame for Prediction:")
     st.dataframe(Z)
 

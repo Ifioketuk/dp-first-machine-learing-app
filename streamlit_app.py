@@ -58,7 +58,7 @@ st.write('This is an app used to predict the CGPA at the end of your first year 
 st.write("Fill in the following features to get your possible GPA")
 col1, col2 = st.columns(2)
 with col1:
-    age_in_year_one=st.number_input("age_in_year_one")
+    age_in_year_one=st.number_input("age_in_year_one",format="%d")
     gender=st.select_slider('gender', options=['male','female'])
     has_disability=st.select_slider('has_disability', options=['Yes','No'])
     times_fell_sick=st.text_input('times_fell_sick')
@@ -72,32 +72,32 @@ with col2:
     subject_3 =st.select_slider('subject_3', options=['A','B','C','D','F']) 
     subject_4=st.select_slider('subject_4', options=['A','B','C','D','F'])
     subject_5=st.select_slider('subject_5', options=['A','B','C','D','F'])
-    grading_system = st.select_slider('grading_system', options=[4, 5, 7, 10])
+    grading_system = st.select_slider('grading system', options=[4, 5, 7, 10])
 
     
 col1, col2= st.columns(2)
 with col1:
     st.write("Give your ratings in the following")
-    class_participation_rating = st.radio("class_participation_rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    class_attendance_rating=st.radio("class_attendance_rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    teaching_style_rating = st.radio("teaching_style_rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    extracurricular_participation = st.radio("extracurricular_participation",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+    class_participation_rating = st.radio("class participation rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+    class_attendance_rating=st.radio("class attendance rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+    teaching_style_rating = st.radio("teaching style rating",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+    extracurricular_participation = st.radio("extracurricular participation",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
 with col2:
-    morning_study = st.radio("morning_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    afternoon_study = st.radio("afternoon_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    evening_study = st.radio("evening_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    late_night_study= st.radio("late_night_study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+    morning_study = st.radio("morning study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+    afternoon_study = st.radio("afternoon study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+    evening_study = st.radio("evening study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+    late_night_study= st.radio("late night study",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
     used_extra_study_materials=st.radio("use of extra study materials",('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
 col1, col2= st.columns(2)
 with col1:
     hours_per_day_personal_study=st.number_input('hours_per_day_personal_study',min_value=0,max_value=24,format="%d")
-    days_per_week_reading=st.number_input('days_per_week_reading',min_value=0,max_value=7,format="%d")
-    study_mode= st.select_slider('study_mode', options=['part time','full time'])
+    days_per_week_reading=st.number_input('How many days of the week do you read',min_value=0,max_value=7,format="%d")
+    study_mode= st.select_slider('study mode', options=['part time','full time'])
     taught_peers= st.select_slider('taught_peers',options=["Yes","No"])
 with col2:
     extra_curricular= st.select_slider('Did you attend extra-curriculars?',options=["Yes","No"])
     allowance=st.select_slider('What was your monthly allowance in Year One?', options=["10k-20k", "30k-50k", "60k-100k", "above 100k"])
-    courses_offered=st.number_input("Number of courses offered")
+    courses_offered=st.number_input("Number of courses offered",format="%d")
 studied_original_course= st.select_slider('Did you study your original course',options=["Yes","No"])
 
                                                                                         
@@ -114,7 +114,7 @@ if st.button('Show CGPA'):
         'age_in_year_one': age_in_year_one,
         'gender':gender ,
         'has_disability': has_disability,
-        'Did you attend extra tutorials?':extra_curricular ,
+        'Did you attend extra tutorials? ':extra_curricular ,
         'extracurricular_participation':extracurricular_participation,
         'class_attendance_rating': class_attendance_rating ,
         'class_participation_rating': class_participation_rating,
@@ -135,8 +135,12 @@ if st.button('Show CGPA'):
         'institution_type':institution_type ,
         'What year did you finish Year One?':year,
         'grading_system': grading_system}
+    
 
     gpa_data_comp_col = pd.DataFrame([data])
+
+    st.write("User Inputs DataFrame:")
+    st.database(gpa_data_comp_col)
 
     # Define grade features and mapping
     grade_features = ['maths', 'english', 'subject_3', 'subject_4', 'subject_5']

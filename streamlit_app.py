@@ -176,8 +176,8 @@ if st.button('Show CGPA'):
     gpa_data_comp_col['cluster'] = loaded_kmeans.predict(gpa_data_comp_col[grade_features + ['Combined_grade']])
     
     # Prepare the data for the main model
-    features_to_drop = ['What year did you finish Year One?', 'english', 'maths', 'subject_3', 'subject_4', 'subject_5']
-    Z = gpa_data_comp_col.drop(features_to_drop, axis=1)
+    Z = gpa_data_comp_col.drop(['What year did you finish Year One?', 'english', 'maths', 'subject_3', 'subject_4', 'subject_5','cgpa_year_one ','cgpa_year_one'], axis=1)  # Features excluding 'id' and 'GPA_normal'
+
     
     # Ensure categorical columns are encoded
     categorical_columns = [col for col in Z.columns if Z[col].dtype == 'object']
@@ -185,7 +185,7 @@ if st.button('Show CGPA'):
     
     # Apply ordinal encoding to categorical columns
     ordinal_enc = OrdinalEncoder()
-    Z[categorical_columns] = ordinal_enc.fit_transform(Z[categorical_columns])
+    Z[categorical_columns] = ordinal_enc.fit(Z[categorical_columns])
     
   
     

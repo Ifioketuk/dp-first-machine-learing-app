@@ -184,7 +184,7 @@ if st.button('Show CGPA'):
 
     # Load the prediction model
     # Create a Booster instance
-    model = xgb.Booster()
+    model = XGBRegressor()
 
     # Load the model from the JSON file
     model.load_model("model2.json")

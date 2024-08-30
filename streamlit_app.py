@@ -183,8 +183,11 @@ if st.button('Show CGPA'):
     Z[categorical_columns] = ordinal_enc.fit_transform(Z[categorical_columns])
 
     # Load the prediction model
-    model = joblib.load("model.json")
+    # Create a Booster instance
+    model = xgb.Booster()
 
+    # Load the model from the JSON file
+    model.load_model("model2.json")
     # Ensure the features match the model training set
     expected_features = model.feature_names_in_
     Z = Z[expected_features]

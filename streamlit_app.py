@@ -112,7 +112,7 @@ if st.button('Show CGPA'):
         'age_in_year_one': age_in_year_one,
         'gender': gender,
         'has_disability': has_disability,
-        'Did you attend extra tutorials?\\xa0': extra_curricular,
+        'Did you attend extra tutorials?': extra_curricular,
         'extracurricular_participation': extracurricular_participation,
         'class_attendance_rating': class_attendance_rating,
         'class_participation_rating': class_participation_rating,
@@ -136,7 +136,7 @@ if st.button('Show CGPA'):
     }
     
     gpa_data_comp_col = pd.DataFrame([data])
-
+    gpa_data_comp_col.columns = gpa_data_comp_col.columns.str.strip().str.replace('\xa0', ' ')
     st.write("User Inputs DataFrame:")
     st.dataframe(gpa_data_comp_col)
     st.write(gpa_data_comp_col.dtypes)

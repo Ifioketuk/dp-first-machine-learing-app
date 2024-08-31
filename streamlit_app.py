@@ -136,7 +136,7 @@ if st.button('Show CGPA'):
     }
     
     gpa_data_comp_col = pd.DataFrame([data])
-    gpa_data_comp_col.columns = gpa_data_comp_col.columns.str.strip().str.replace('\xa0', ' ')
+    gpa_data_comp_col.columns = gpa_data_comp_col.columns.str.strip().str.replace('\xa0', '')
     st.write("User Inputs DataFrame:")
     st.dataframe(gpa_data_comp_col)
     st.write(gpa_data_comp_col.dtypes)
@@ -187,7 +187,7 @@ if st.button('Show CGPA'):
     model = XGBRegressor()
 
     # Load the model from the JSON file
-    model.load_model("model2.json")
+    model.load_model("model4.json")
     # Ensure the features match the model training set
     expected_features = model.feature_names_in_
     Z = Z[expected_features]

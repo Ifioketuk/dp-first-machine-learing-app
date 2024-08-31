@@ -139,7 +139,7 @@ if st.button('Show CGPA'):
     gpa_data_comp_col.columns = gpa_data_comp_col.columns.str.strip().str.replace('\xa0', '')
     st.write("User Inputs DataFrame:")
     st.dataframe(gpa_data_comp_col)
-    st.write(gpa_data_comp_col.dtypes)
+    
 
     # Define grade features and mapping
     grade_features = ['maths', 'english', 'subject_3', 'subject_4', 'subject_5']
@@ -195,8 +195,7 @@ if st.button('Show CGPA'):
 
     Z.replace([np.inf, -np.inf], np.nan, inplace=True)
 
-    st.write("Prepared DataFrame for Prediction:")
-    st.dataframe(Z)
+   
 
     # Make predictions
     predictions = model.predict(Z)

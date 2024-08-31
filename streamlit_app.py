@@ -74,17 +74,17 @@ with col2:
 # Additional user inputs for rating features and study habits
 col1, col2 = st.columns(2)
 with col1:
-    class_participation_rating = st.radio("class participation rating", ('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    class_attendance_rating = st.radio("class attendance rating", ('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    teaching_style_rating = st.radio("teaching style rating", ('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    extracurricular_participation = st.radio("extracurricular participation", ('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+    class_participation_rating = st.radio("class participation rating", (0, 1, 3, 5, 7))
+    class_attendance_rating = st.radio("class attendance rating", (0, 1, 3, 5, 7))
+    teaching_style_rating = st.radio("teaching style rating", (0, 1, 3, 5, 7))
+    extracurricular_participation = st.radio("extracurricular participation", (0, 1, 3, 5, 7))
 
 with col2:
-    morning_study = st.radio("morning study", ('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    afternoon_study = st.radio("afternoon study", ('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    evening_study = st.radio("evening study", ('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    late_night_study = st.radio("late night study", ('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
-    used_extra_study_materials = st.radio("use of extra study materials", ('⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'))
+    morning_study = st.radio("morning study", (0, 1, 3, 5, 7))
+    afternoon_study = st.radio("afternoon study", (0, 1, 3, 5, 7))
+    evening_study = st.radio("evening study", (0, 1, 3, 5, 7))
+    late_night_study = st.radio("late night study", (0, 1, 3, 5, 7))
+    used_extra_study_materials = st.radio("use of extra study materials", (0, 1, 3, 5, 7))
 
 col1, col2 = st.columns(2)
 with col1:
